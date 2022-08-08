@@ -36,18 +36,20 @@
     <Button
         android:layout_width="325dp"
         android:layout_height="60dp"
-        android:text="Ingresar"
-        android:textSize="18sp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/mybutton"
-        android:layout_marginTop="80dp"/>
+        android:onClick="clicIniciarSesion"
+        android:text="Iniciar Sesion"
+        android:textSize="18sp" />
        <!-- android:textAllCaps="false"-->
     <Button
         android:layout_width="325dp"
         android:layout_height="60dp"
-        android:text="Registrarse"
-        android:textSize="18sp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/mybutton"
-        android:layout_marginTop="20dp" />
+        android:onClick="clicRegistrarse"
+        android:text="Registrarse"
+        android:textSize="18sp" />
 
 
 </LinearLayout>
