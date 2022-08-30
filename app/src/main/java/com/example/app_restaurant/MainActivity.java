@@ -6,6 +6,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -14,22 +17,19 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-    }
+        TimerTask tarea  = new TimerTask() {
+            @Override
+            public void run() {
+                Intent intent = new Intent(MainActivity.this, MenuPrincipal.class);
+                startActivity(intent);
+                finish();
+            }
+        };
 
-
-    /*Metodo o evento clic en el boton de iniciar sesion en la app*/
-    public void clicIniciarSesion(View view){
-
-        startActivity(new Intent(MainActivity.this,Login.class));
-        //finish();
-
-    }
-
-    /*Metodo o evento clic en el boton de Registrarse en la app*/
-    public void clicRegistrarse(View view){
-
-        startActivity(new Intent(MainActivity.this,RegisterActivity.class));
+        Timer tiempo  = new Timer();
+        tiempo.schedule(tarea, 3000);
 
     }
+
 
 }
