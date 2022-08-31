@@ -10,21 +10,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRestaurant">
         <activity
-            android:name=".AccountActivity"
+            android:name=".ProfileActivity"
             android:exported="false" />
+        <activity
+            android:name=".AccountActivity"
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
             android:exported="false" />
         <activity
             android:name=".MenuPrincipal"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name=".RegisterActivity"
-            android:exported="false"
-            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
-        <activity
-            android:name=".Login"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity

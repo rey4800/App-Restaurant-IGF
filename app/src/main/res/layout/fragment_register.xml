@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".fragments.RegisterFragment"
+    >
+
+ <LinearLayout
+     android:layout_width="match_parent"
+     android:layout_height="match_parent"
+     android:orientation="vertical"
+     android:gravity="center_horizontal"
+     android:paddingTop="50dp">
+
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Registrarse"
+         android:textSize="30sp"
+         android:textColor="#000"
+         android:textStyle="bold" />
+
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="Crea una cuenta. Gratis !"
+         android:gravity="center"
+         android:layout_marginTop="15dp"
+         android:textSize="16dp" />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Email"
+         android:inputType="textEmailAddress"
+         android:textSize="16dp"
+         android:layout_marginTop="30dp"
+         android:layout_marginRight="30dp"
+         android:layout_marginLeft="30dp" />
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Nombre de usuario"
+         android:inputType="text"
+         android:textSize="16dp"
+         android:layout_marginTop="30dp"
+         android:layout_marginRight="30dp"
+         android:layout_marginLeft="30dp" />
+
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Password"
+         android:inputType="textPassword"
+         android:textSize="16dp"
+         android:layout_marginTop="30dp"
+         android:layout_marginRight="30dp"
+         android:layout_marginLeft="30dp" />
+     <EditText
+         android:layout_width="match_parent"
+         android:layout_height="wrap_content"
+         android:hint="Confirmar Password"
+         android:inputType="textPassword"
+         android:textSize="16dp"
+         android:layout_marginTop="30dp"
+         android:layout_marginRight="30dp"
+         android:layout_marginLeft="30dp" />
+
+     <Button
+         android:layout_width="350dp"
+         android:layout_height="60dp"
+         android:layout_marginTop="100dp"
+         android:background="@drawable/mybutton"
+         android:id="@+id/btnRegistrarse"
+         android:text="Registrarse"
+         android:textSize="18sp" />
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="@string/yatieneCuenta"
+         android:layout_marginTop="20dp"
+         android:textSize="14sp"
+         android:id="@+id/txtIniciarSesion"
+         android:textStyle="bold" />
+
+
+
+
+
+
+
+ </LinearLayout>
+
+</FrameLayout>
