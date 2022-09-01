@@ -5,8 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -14,6 +18,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
 
     private BottomNavigationView bottomNavigationView;
+    private Button btnAgregarRestaurante;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,10 +29,13 @@ public class MenuPrincipal extends AppCompatActivity {
 
         //Inicializar variable menu
          bottomNavigationView = findViewById(R.id.bottom_navigation);
+         btnAgregarRestaurante = findViewById(R.id.btnAgregar);
+        opcionSeleccionadaMenu();
 
-         opcionSeleccionadaMenu();
 
     }
+
+
 
 
     public void opcionSeleccionadaMenu(){
@@ -44,6 +52,7 @@ public class MenuPrincipal extends AppCompatActivity {
                         return true;
 
                     case R.id.principal:
+
                         return true;
 
                     case R.id.cuenta:
@@ -58,5 +67,11 @@ public class MenuPrincipal extends AppCompatActivity {
 
     }
 
+    public void btnAgregarRestaurante(View view){
+
+        startActivity(new Intent(MenuPrincipal.this,AgregarRestauranteActivity.class));
+       // finish();
+
+    }
 
 }

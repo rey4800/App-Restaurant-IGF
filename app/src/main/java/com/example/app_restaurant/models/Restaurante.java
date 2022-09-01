@@ -7,6 +7,16 @@ public class Restaurante {
     private String departamento;
     private String imagen;
     private Coordenada coordenadas;
+    private String ubicacion;
+
+    public String getUbicacion() {
+        return ubicacion;
+    }
+
+    public void setUbicacion(String ubicacion) {
+        this.ubicacion = ubicacion;
+    }
+
     private int likes;
     private String id_Usu; //id del usuario
 
@@ -74,7 +84,6 @@ public class Restaurante {
         this.id_Usu = id_Usu;
     }
 
-
     @Override
     public String toString() {
         return "Restaurante{" +
@@ -84,6 +93,7 @@ public class Restaurante {
                 ", departamento='" + departamento + '\'' +
                 ", imagen='" + imagen + '\'' +
                 ", coordenadas=" + coordenadas +
+                ", ubicacion='" + ubicacion + '\'' +
                 ", likes=" + likes +
                 ", id_Usu='" + id_Usu + '\'' +
                 '}';
