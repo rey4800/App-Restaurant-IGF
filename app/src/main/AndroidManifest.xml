@@ -10,15 +10,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRestaurant">
         <activity
-            android:name=".ProfileActivity"
-            android:exported="false" />
-        <activity
             android:name=".AccountActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".FavoriteActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />
         <activity
             android:name=".MenuPrincipal"
             android:exported="false"

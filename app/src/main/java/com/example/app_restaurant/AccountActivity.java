@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.example.app_restaurant.fragments.LoginFragment;
+import com.example.app_restaurant.fragments.ProfileFragment;
 import com.example.app_restaurant.fragments.RegisterFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -80,6 +81,10 @@ public class AccountActivity extends AppCompatActivity {
         if(mAuth.getCurrentUser() !=null){
 
 
+            FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+            transaction.setReorderingAllowed(true);
+            transaction.replace(R.id.frame1, new ProfileFragment());
+            transaction.commit();
 
         }else{
 
