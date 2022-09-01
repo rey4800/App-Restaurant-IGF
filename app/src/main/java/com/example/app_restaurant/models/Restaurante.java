@@ -6,8 +6,11 @@ public class Restaurante {
     private String descripcion;
     private String departamento;
     private String imagen;
-    private Coordenada coordenadas;
+    public Coordenada coordenadas;
     private String ubicacion;
+
+
+
 
     public String getUbicacion() {
         return ubicacion;
@@ -60,13 +63,6 @@ public class Restaurante {
         this.imagen = imagen;
     }
 
-    public Coordenada getCoordenadas() {
-        return coordenadas;
-    }
-
-    public void setCoordenadas(Coordenada coordenadas) {
-        this.coordenadas = coordenadas;
-    }
 
     public int getLikes() {
         return likes;
@@ -84,18 +80,5 @@ public class Restaurante {
         this.id_Usu = id_Usu;
     }
 
-    @Override
-    public String toString() {
-        return "Restaurante{" +
-                "id_restaurante='" + id_restaurante + '\'' +
-                ", nombre='" + nombre + '\'' +
-                ", descripcion='" + descripcion + '\'' +
-                ", departamento='" + departamento + '\'' +
-                ", imagen='" + imagen + '\'' +
-                ", coordenadas=" + coordenadas +
-                ", ubicacion='" + ubicacion + '\'' +
-                ", likes=" + likes +
-                ", id_Usu='" + id_Usu + '\'' +
-                '}';
-    }
+
 }

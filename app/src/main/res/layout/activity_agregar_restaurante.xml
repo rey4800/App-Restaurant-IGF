@@ -67,7 +67,8 @@
             android:id="@+id/btnGPS"
             android:layout_width="wrap_content"
             android:layout_height="70dp"
-            android:background="@drawable/ic_add_location"/>
+            android:background="@drawable/ic_add_location"
+            android:onClick="AgregarUbicacionGPS" />
 
         <EditText
             android:id="@+id/txtGPS"
@@ -133,12 +134,13 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/btnInicarSesion"
+        android:id="@+id/btnAgregarRestaurante"
         android:layout_width="350dp"
         android:layout_height="60dp"
         android:layout_marginTop="15dp"
         android:backgroundTint="#F3D26F"
-        android:text="Iniciar Sesion"
+        android:onClick="btnAgregarRestaurante"
+        android:text="Agregar Restaurante"
         android:textSize="18sp" />
 
 </LinearLayout>
