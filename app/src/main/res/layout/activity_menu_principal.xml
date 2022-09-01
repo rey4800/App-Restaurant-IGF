@@ -19,7 +19,7 @@
             android:layout_centerVertical="true"
             android:background="@color/banner_background"
             android:padding="5dp"
-            android:src="@drawable/add_missing_place_icon_2" />
+            android:src="@drawable/ic_add_restauran" />
     </RelativeLayout>
 
 

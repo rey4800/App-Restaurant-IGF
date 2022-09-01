@@ -75,7 +75,7 @@
          android:layout_width="350dp"
          android:layout_height="60dp"
          android:layout_marginTop="100dp"
-         android:background="@drawable/mybutton"
+         android:backgroundTint="#F3D26F"
          android:id="@+id/btnRegistrarse"
          android:text="Registrarse"
          android:textSize="18sp" />

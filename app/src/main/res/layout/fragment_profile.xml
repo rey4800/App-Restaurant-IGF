@@ -157,7 +157,7 @@
             android:layout_height="60dp"
             android:layout_marginTop="50dp"
             android:layout_gravity="center_horizontal"
-            android:background="@drawable/mybutton"
+            android:backgroundTint="#F3D26F"
             android:text="Cerrar Sesion"
             android:textSize="18sp" />
 

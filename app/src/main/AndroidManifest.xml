@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppRestaurant">
         <activity
+            android:name=".AgregarRestauranteActivity"
+            android:exported="false" />
+        <activity
             android:name=".AccountActivity"
             android:exported="false"
             android:theme="@style/Theme.AppCompat.DayNight.NoActionBar" />

@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
 
+import com.example.app_restaurant.databinding.ActivityMainBinding;
 import com.example.app_restaurant.fragments.LoginFragment;
 import com.example.app_restaurant.fragments.ProfileFragment;
 import com.example.app_restaurant.fragments.RegisterFragment;
@@ -20,11 +22,14 @@ public class AccountActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
     private FirebaseAuth mAuth;
+    ActivityMainBinding binding;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_account);
+      setContentView(R.layout.activity_account);
+
+
 
         //atributos de ventana
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
@@ -95,6 +100,7 @@ public class AccountActivity extends AppCompatActivity {
 
 
         }
+
 
     }
 
