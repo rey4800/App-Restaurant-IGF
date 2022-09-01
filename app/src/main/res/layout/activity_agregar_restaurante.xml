@@ -80,6 +80,13 @@
 
     </LinearLayout>
 
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginLeft="30dp"/>
     <EditText
         android:id="@+id/txtDetallesUbi"
         android:layout_width="match_parent"
@@ -91,19 +98,13 @@
         android:layout_marginRight="30dp"
         android:layout_marginLeft="30dp" />
 
-        <Spinner
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:layout_marginLeft="30dp"/>
+
     <TextView
-        android:id="@+id/spinner"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agrega una imagen"
+        android:text="-Agrega una imagen"
         android:gravity="center"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="30dp"
         android:textSize="16dp" />
 
 
@@ -118,6 +119,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="14dp"
+            android:onClick="botonCargar"
             android:text="Añadir Imagen" />
 
         <ImageView
