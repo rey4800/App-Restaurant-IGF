@@ -76,4 +76,8 @@ dependencies {
     //Para google maps
     implementation 'com.google.android.gms:play-services-maps:18.0.2'
 
+    //Para recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+    implementation 'androidx.cardview:cardview:1.0.0'
+
 }
