@@ -9,8 +9,21 @@ public class Restaurante {
     public Coordenada coordenadas;
     private String ubicacion;
 
+    public Restaurante(){
 
+    }
 
+    public Restaurante(String id_restaurante, String nombre, String descripcion, String departamento, String imagen, Coordenada coordenadas, String ubicacion, int likes, String id_Usu) {
+        this.id_restaurante = id_restaurante;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.departamento = departamento;
+        this.imagen = imagen;
+        this.coordenadas = coordenadas;
+        this.ubicacion = ubicacion;
+        this.likes = likes;
+        this.id_Usu = id_Usu;
+    }
 
     public String getUbicacion() {
         return ubicacion;
