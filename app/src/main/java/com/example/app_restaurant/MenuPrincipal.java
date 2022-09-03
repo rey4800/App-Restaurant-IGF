@@ -34,6 +34,9 @@ public class MenuPrincipal extends AppCompatActivity {
     private DatabaseReference mDatabase;
     private BottomNavigationView bottomNavigationView;
     private Button btnAgregarRestaurante;
+    private  ListaRestaurantesAdapter listaRestaurante;
+    RecyclerView recyclerView;
+    Restaurante restauranteSeleccionado;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,14 +48,18 @@ public class MenuPrincipal extends AppCompatActivity {
         //Inicializar variable menu
          bottomNavigationView = findViewById(R.id.bottom_navigation);
          btnAgregarRestaurante = findViewById(R.id.btnAgregar);
+         recyclerView = findViewById(R.id.listRestaurantes);
         opcionSeleccionadaMenu();
         cargarListaRestaurantes();
+
+
+
     }
 
     public void cargarListaRestaurantes(){
         mDatabase = FirebaseDatabase.getInstance().getReference();
         restaurantes = new ArrayList<>();
-        ListaRestaurantesAdapter listaRestaurante = new ListaRestaurantesAdapter(restaurantes, this);
+        listaRestaurante = new ListaRestaurantesAdapter(restaurantes, this);
         mDatabase = FirebaseDatabase.getInstance().getReference("Restaurantes");
 
         mDatabase.addValueEventListener(new ValueEventListener() {
@@ -71,7 +78,7 @@ public class MenuPrincipal extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerView = findViewById(R.id.listRestaurantes);
+
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listaRestaurante);

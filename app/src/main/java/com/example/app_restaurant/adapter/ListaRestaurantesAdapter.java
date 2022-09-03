@@ -24,6 +24,7 @@ public class ListaRestaurantesAdapter extends RecyclerView.Adapter<ListaRestaura
     private LayoutInflater inflater;
     private Context context;
 
+
     public ListaRestaurantesAdapter(List<Restaurante> item, Context context){
         this.inflater = LayoutInflater.from(context);
         this.context = context;
@@ -46,7 +47,11 @@ public class ListaRestaurantesAdapter extends RecyclerView.Adapter<ListaRestaura
         return data.size();
     }
 
+
+
     public void setItem(List<Restaurante> items) { data = items; }
+
+
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ImageView img;
