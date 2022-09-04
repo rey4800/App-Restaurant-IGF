@@ -47,7 +47,7 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_restaurante);
 
-        //Instanciar los obetos de firebase
+        //Instanciar los objetos de firebase
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();

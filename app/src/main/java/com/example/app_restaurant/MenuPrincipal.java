@@ -2,6 +2,7 @@ package com.example.app_restaurant;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,11 +16,14 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.app_restaurant.adapter.ListaRestaurantesAdapter;
+import com.example.app_restaurant.fragments.LoginFragment;
+import com.example.app_restaurant.fragments.ProfileFragment;
 import com.example.app_restaurant.models.Coordenada;
 import com.example.app_restaurant.models.Restaurante;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,7 +40,10 @@ public class MenuPrincipal extends AppCompatActivity {
     private Button btnAgregarRestaurante;
     private  ListaRestaurantesAdapter listaRestaurante;
     RecyclerView recyclerView;
-    Restaurante restauranteSeleccionado;
+    private FirebaseAuth mAuth;
+
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +56,7 @@ public class MenuPrincipal extends AppCompatActivity {
          bottomNavigationView = findViewById(R.id.bottom_navigation);
          btnAgregarRestaurante = findViewById(R.id.btnAgregar);
          recyclerView = findViewById(R.id.listRestaurantes);
+        mAuth = FirebaseAuth.getInstance();
         opcionSeleccionadaMenu();
         cargarListaRestaurantes();
 
@@ -77,6 +85,7 @@ public class MenuPrincipal extends AppCompatActivity {
 
             }
         });
+
 
 
         recyclerView.setHasFixedSize(true);
@@ -115,8 +124,18 @@ public class MenuPrincipal extends AppCompatActivity {
 
     public void btnAgregarRestaurante(View view){
 
-        startActivity(new Intent(MenuPrincipal.this,AgregarRestauranteActivity.class));
-       // finish();
+
+        if(mAuth.getCurrentUser() !=null){
+
+            startActivity(new Intent(MenuPrincipal.this,AgregarRestauranteActivity.class));
+            // finish();
+
+        }else{
+
+            Toast.makeText(this, "Debe de Iniciar Sesion para agregar un Restaurante", Toast.LENGTH_LONG).show();
+
+        }
+
 
     }
 

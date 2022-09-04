@@ -1,6 +1,7 @@
 package com.example.app_restaurant.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.view.LayoutInflater;
@@ -15,8 +16,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.app_restaurant.R;
+import com.example.app_restaurant.VerRestauranteActivity;
 import com.example.app_restaurant.models.Restaurante;
 
+import java.io.Serializable;
 import java.util.List;
 
 public class ListaRestaurantesAdapter extends RecyclerView.Adapter<ListaRestaurantesAdapter.ViewHolder>{
@@ -40,6 +43,16 @@ public class ListaRestaurantesAdapter extends RecyclerView.Adapter<ListaRestaura
     @Override
     public void onBindViewHolder(final ListaRestaurantesAdapter.ViewHolder holder, final int position) {
         holder.bindData(data.get(position));
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(holder.itemView.getContext(), VerRestauranteActivity.class);
+                intent.putExtra("restaurante", (Serializable) data.get(position));
+                holder.itemView.getContext().startActivity(intent);
+            }
+        });
     }
 
     @Override

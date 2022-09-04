@@ -1,6 +1,8 @@
 package com.example.app_restaurant.models;
 
-public class Restaurante {
+import java.io.Serializable;
+
+public class Restaurante implements Serializable {
     private String id_restaurante;
     private String nombre;
     private String descripcion;
@@ -93,5 +95,17 @@ public class Restaurante {
         this.id_Usu = id_Usu;
     }
 
-
+    @Override
+    public String toString() {
+        return "Restaurante{" +
+                "id_restaurante='" + id_restaurante + '\'' +
+                ", nombre='" + nombre + '\'' +
+                ", descripcion='" + descripcion + '\'' +
+                ", departamento='" + departamento + '\'' +
+                ", imagen='" + imagen + '\'' +
+                ", ubicacion='" + ubicacion + '\'' +
+                ", likes=" + likes +
+                ", id_Usu='" + id_Usu + '\'' +
+                '}';
+    }
 }
