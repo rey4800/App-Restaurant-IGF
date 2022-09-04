@@ -1,5 +1,6 @@
 package com.example.app_restaurant;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -7,6 +8,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -18,9 +20,13 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.app_restaurant.models.Coordenada;
 import com.example.app_restaurant.models.Restaurante;
+import com.example.app_restaurant.models.User;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -36,6 +42,7 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
     private  static final int AgregarUbicacion = 0;
     private Restaurante restaurante;
     private double latitud,longitud;
+    private User usuario;
 
     //Variable para manejar imagen
     private static final int File = 1;
@@ -52,6 +59,7 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         restaurante =  new Restaurante();
+        usuario = new User();
 
         //Inicilization variables
         spinner1 =  findViewById(R.id.spinner);
@@ -68,8 +76,34 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item,opciones);
         spinner1.setAdapter(adapter);
 
+        getUserInfo();//Obtener los datos del usuario
 
 
+    }
+
+
+    private void getUserInfo() {
+        String id = mAuth.getCurrentUser().getUid();
+        mDatabase.child("Users").child(id).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+
+                if (snapshot.exists()) {
+                    usuario.setNombre(snapshot.child("nombre").getValue().toString());
+                    usuario.setEmail(snapshot.child("email").getValue().toString());
+                    usuario.setPassword(snapshot.child("password").getValue().toString());
+                    usuario.setPuntaje(Integer.parseInt(snapshot.child("puntaje").getValue().toString()));
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+                Log.e("Error database", error.toString());
+
+            }
+        });
     }
 
     public void btnAgregarRestaurante(View view){

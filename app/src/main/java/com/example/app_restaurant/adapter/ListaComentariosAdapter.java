@@ -11,7 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.app_restaurant.R;
 import com.example.app_restaurant.models.Comentario;
-import com.example.app_restaurant.models.Restaurante;
 
 
 import java.util.List;

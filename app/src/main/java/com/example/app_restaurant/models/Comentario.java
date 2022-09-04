@@ -8,7 +8,15 @@ public class Comentario {
     private String comentario;
     private String id_restaurante;
     private String fecha;
+    private String filtro;
 
+    public String getFiltro() {
+        return filtro;
+    }
+
+    public void setFiltro(String filtro) {
+        this.filtro = filtro;
+    }
 
     public String getId() {
         return id;

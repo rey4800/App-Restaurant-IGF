@@ -1,5 +1,6 @@
 package com.example.app_restaurant;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -12,11 +13,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.example.app_restaurant.models.Comentario;
+import com.example.app_restaurant.models.Like;
 import com.example.app_restaurant.models.Restaurante;
+import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Timer;
+import java.util.UUID;
 
 public class VerRestauranteActivity extends AppCompatActivity {
 
@@ -24,6 +37,10 @@ public class VerRestauranteActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private ImageView imageView;
     private TextView txtNombreRestaurante, txtDescripcion, txtDetallesUbi,txtLike,txtDepartamento;
+    private DatabaseReference mDatabase;
+    private FloatingActionButton btnLike;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +60,15 @@ public class VerRestauranteActivity extends AppCompatActivity {
         txtLike = findViewById(R.id.txtLike);
         imageView = findViewById(R.id.image);
         mAuth = FirebaseAuth.getInstance();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        btnLike = findViewById(R.id.btnLike);
+
 
         mostrarDatosRestauranteSeleccionado();
+
+
+
+
     }
 
     public void mostrarDatosRestauranteSeleccionado(){
@@ -68,21 +92,27 @@ public class VerRestauranteActivity extends AppCompatActivity {
     }
 
 
-    public void designBotonLike(){
+    public void btnAccionLiked(View view){
 
         if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
 
-            startActivity(new Intent(VerRestauranteActivity.this,AgregarRestauranteActivity.class));
-            // finish();
+
+
 
         }else{
 
 
 
+            Toast.makeText(this, "Necesita Iniciar Sesion", Toast.LENGTH_SHORT).show();
+
         }
 
 
 
+
     }
+
+
+
 
 }

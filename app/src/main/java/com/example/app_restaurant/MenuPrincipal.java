@@ -42,7 +42,6 @@ public class MenuPrincipal extends AppCompatActivity {
     private  ListaRestaurantesAdapter listaRestaurante;
     RecyclerView recyclerView;
     private FirebaseAuth mAuth;
-    private  FloatingActionButton btnLike;
 
 
 
@@ -58,7 +57,6 @@ public class MenuPrincipal extends AppCompatActivity {
          bottomNavigationView = findViewById(R.id.bottom_navigation);
          btnAgregarRestaurante = findViewById(R.id.btnAgregar);
          recyclerView = findViewById(R.id.listRestaurantes);
-         btnLike = findViewById(R.id.btnLike);
          mAuth = FirebaseAuth.getInstance();
          opcionSeleccionadaMenu();
          cargarListaRestaurantes();

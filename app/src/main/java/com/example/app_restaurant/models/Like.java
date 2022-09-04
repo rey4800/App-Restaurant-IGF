@@ -5,6 +5,7 @@ public class Like {
     private String id_Usu;
     private String id_restaurante;
     private String liked;
+    private String filtros;
 
     public String getId() {
         return id;
@@ -38,6 +39,14 @@ public class Like {
         this.liked = liked;
     }
 
+    public String getFiltros() {
+        return filtros;
+    }
+
+    public void setFiltros(String filtros) {
+        this.filtros = filtros;
+    }
+
     @Override
     public String toString() {
         return "Like{" +
@@ -47,4 +56,6 @@ public class Like {
                 ", liked='" + liked + '\'' +
                 '}';
     }
+
+
 }

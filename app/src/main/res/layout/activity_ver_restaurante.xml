@@ -157,7 +157,10 @@
                     android:text="0"
                     android:textColor="@color/lightblack2"
                     android:textSize="16dp" />
+
+
             </LinearLayout>
+
 
             <Button
                 android:id="@+id/btnVerComentarios"
@@ -185,15 +188,16 @@
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnLike"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:baselineAlignBottom="false"
+        android:layout_marginRight="30dp"
         android:backgroundTint="@color/white2"
+        android:baselineAlignBottom="false"
         android:clickable="true"
-        app:fabSize="normal"
-        android:id="@+id/btnLike"
-        app:layout_anchor="@id/appbar"
+        android:onClick="btnAccionLiked"
         android:src="@drawable/ic_like"
-        app:layout_anchorGravity="end|bottom"
-        android:layout_marginRight="30dp"/>
+        app:fabSize="normal"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="end|bottom" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
