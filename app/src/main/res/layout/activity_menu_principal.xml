@@ -77,19 +77,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:layout_marginBottom="15dp">
+
                 <Button
                     android:id="@+id/btnTodos"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:onClick="btnTodos"
                     android:text="Todos"
                     android:textSize="15sp" />
+
                 <Button
                     android:id="@+id/btnMasLikes"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
+                    android:onClick="btnMasLikes"
                     android:text="Mas likes"
+                    android:textSize="15sp" />
+                <Button
+                    android:id="@+id/btnMenosLike"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:onClick="btnMenosLike"
+                    android:text="Menos likes"
                     android:textSize="15sp" />
 
             </LinearLayout>

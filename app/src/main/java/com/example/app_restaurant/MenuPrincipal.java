@@ -14,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.app_restaurant.adapter.ListaRestaurantesAdapter;
@@ -61,6 +62,9 @@ public class MenuPrincipal extends AppCompatActivity {
          btnAgregarRestaurante = findViewById(R.id.btnAgregar);
          recyclerView = findViewById(R.id.listRestaurantes);
          mAuth = FirebaseAuth.getInstance();
+        //Instanciar los objetos de firebase
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();//Obtenemos la refrencia de nuestra base de datos
          opcionSeleccionadaMenu();
          cargarListaRestaurantes();
 
@@ -147,11 +151,10 @@ public class MenuPrincipal extends AppCompatActivity {
 
     public void btnMasLikes(View view){
 
-
         restaurantes = new ArrayList<>();
         listaRestaurante = new ListaRestaurantesAdapter(restaurantes, this);
-        DatabaseReference comment = databaseReference.child("Comentarios");
-        Query buscar = comment.orderByChild("likes");
+        DatabaseReference comment = databaseReference.child("Restaurantes");
+        Query buscar = comment.orderByChild("likes").startAt(0);
 
         buscar.addValueEventListener(new ValueEventListener() {
             @Override
@@ -161,6 +164,47 @@ public class MenuPrincipal extends AppCompatActivity {
                     Restaurante restaurante = dataSnapshot.getValue(Restaurante.class);
                     restaurantes.add(restaurante);
                 }
+
+
+                listaRestaurante.notifyDataSetChanged();
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        linearLayoutManager.setReverseLayout(true);
+        linearLayoutManager.setStackFromEnd(true);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setLayoutManager(linearLayoutManager);
+        recyclerView.setAdapter(listaRestaurante);
+
+
+    }
+
+
+    public void btnMenosLike(View view){
+
+
+        restaurantes = new ArrayList<>();
+        listaRestaurante = new ListaRestaurantesAdapter(restaurantes, this);
+        DatabaseReference comment = databaseReference.child("Restaurantes");
+        Query buscar = comment.orderByChild("likes").startAt(0);
+
+        buscar.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                restaurantes.clear();
+                for (DataSnapshot dataSnapshot: snapshot.getChildren()){
+                    Restaurante restaurante = dataSnapshot.getValue(Restaurante.class);
+                    restaurantes.add(restaurante);
+                }
+
+
                 listaRestaurante.notifyDataSetChanged();
             }
 
@@ -174,8 +218,19 @@ public class MenuPrincipal extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listaRestaurante);
 
+    }
+
+
+    public void btnTodos(View view){
+
+        cargarListaRestaurantes();
+
 
     }
+
+
+
+
 
 
 }
