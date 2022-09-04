@@ -169,6 +169,17 @@
                 android:text="Ver comentarios"
                 android:textSize="18sp" />
 
+            <Button
+                android:id="@+id/btnComoLlegar"
+                android:layout_width="350dp"
+                android:layout_height="60dp"
+                android:layout_marginTop="10dp"
+                android:backgroundTint="#F3D26F"
+                android:onClick="btnComoLlegar"
+                android:text="Como llegar"
+                android:textSize="18sp" />
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>

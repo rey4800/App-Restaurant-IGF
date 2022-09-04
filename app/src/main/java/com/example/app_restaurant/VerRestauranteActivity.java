@@ -3,6 +3,7 @@ package com.example.app_restaurant;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -29,6 +30,7 @@ public class VerRestauranteActivity extends AppCompatActivity {
 
         restaurante = new Restaurante();
         restaurante = (Restaurante) getIntent().getExtras().getSerializable("restaurante");
+        Log.d("restaurante", String.valueOf(restaurante.coordenadas.latitud));
 
         //Inicilization Variables
 
@@ -39,34 +41,27 @@ public class VerRestauranteActivity extends AppCompatActivity {
         txtLike = findViewById(R.id.txtLike);
         imageView = findViewById(R.id.image);
 
-
         mostrarDatosRestauranteSeleccionado();
-
-
-
     }
 
-
     public void mostrarDatosRestauranteSeleccionado(){
-
         Glide.with(this).load(restaurante.getImagen()).into(imageView);
         txtNombreRestaurante.setText(restaurante.getNombre());
         txtDescripcion.setText(restaurante.getDescripcion());
         txtDetallesUbi.setText(restaurante.getUbicacion());
         txtDepartamento.setText(restaurante.getDepartamento());
         txtLike.setText(String.valueOf(restaurante.getLikes()));
-
-
     }
 
     public void btnVerComentarios(View view){
-
         Intent intent = new Intent(this, CommentActivity.class);
         intent.putExtra("restaurante", (Serializable) restaurante);
         startActivity(intent);
+    }
 
-
-
+    public void btnComoLlegar(View view){
+        Uri uri = Uri.parse("geo:" + restaurante.coordenadas.latitud + "," + restaurante.coordenadas.longitud + "?z=16&q=" + restaurante.coordenadas.latitud + "," + restaurante.coordenadas.longitud + "(" + restaurante.getNombre() + ")");
+        startActivity( new Intent(Intent.ACTION_VIEW, uri));
     }
 
 
