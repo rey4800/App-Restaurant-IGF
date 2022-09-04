@@ -10,6 +10,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.example.app_restaurant.databinding.ActivityMainBinding;
 import com.example.app_restaurant.fragments.LoginFragment;
@@ -44,41 +45,6 @@ public class AccountActivity extends AppCompatActivity {
     }
 
 
-
-
-
-
-
-    public void opcionSeleccionadaMenu(){
-        bottomNavigationView.setSelectedItemId(R.id.cuenta);
-
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
-                    case R.id.favoritos:
-                        startActivity(new Intent(getApplicationContext(),FavoriteActivity.class));
-                        overridePendingTransition(0,0);
-                        finish();
-                        return true;
-
-                    case R.id.principal:
-                        startActivity(new Intent(getApplicationContext(),MenuPrincipal.class));
-                        overridePendingTransition(0,0);
-                        finish();
-                        return true;
-
-                    case R.id.cuenta:
-                        return true;
-                }
-                return false;
-            }
-        });
-
-    }
-
-
-
     @Override
     protected void onStart() {
         super.onStart();
@@ -101,6 +67,49 @@ public class AccountActivity extends AppCompatActivity {
 
         }
 
+
+    }
+
+
+    public void opcionSeleccionadaMenu(){
+        bottomNavigationView.setSelectedItemId(R.id.cuenta);
+
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()){
+                    case R.id.favoritos:
+                    validarInicioFavoritos();
+                        return true;
+
+                    case R.id.principal:
+                        startActivity(new Intent(getApplicationContext(),MenuPrincipal.class));
+                        overridePendingTransition(0,0);
+                        finish();
+                        return true;
+
+                    case R.id.cuenta:
+                        return true;
+                }
+                return false;
+            }
+        });
+
+    }
+
+    public void validarInicioFavoritos(){
+
+        if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
+
+            startActivity(new Intent(getApplicationContext(),FavoriteActivity.class));
+            overridePendingTransition(0,0);
+            finish();
+
+        }else{
+
+            Toast.makeText(this, "Debe de Iniciar Sesion para ver Favoritos", Toast.LENGTH_LONG).show();
+
+        }
 
     }
 

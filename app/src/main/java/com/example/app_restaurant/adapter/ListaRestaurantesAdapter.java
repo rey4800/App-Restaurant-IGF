@@ -36,7 +36,7 @@ public class ListaRestaurantesAdapter extends RecyclerView.Adapter<ListaRestaura
 
     @Override
     public ListaRestaurantesAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = inflater.inflate(R.layout.item_restaurante, null);
+        View view = inflater.inflate(R.layout.item_restaurante, parent,false);
         return new ListaRestaurantesAdapter.ViewHolder(view);
     }
 

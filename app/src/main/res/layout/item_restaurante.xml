@@ -64,9 +64,9 @@
                 android:id="@+id/tvLikesItemRestaurante"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignParentTop="true"
-                android:layout_marginStart="218dp"
-                android:layout_marginTop="76dp"
+                android:layout_below="@+id/tvDepartamentoItemRestaurante"
+                android:layout_marginStart="208dp"
+                android:layout_marginTop="3dp"
                 android:layout_toEndOf="@+id/imgList"
                 android:text="Like: 123" />
         </RelativeLayout>

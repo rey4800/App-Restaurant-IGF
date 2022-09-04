@@ -31,6 +31,10 @@ public class FavoriteActivity extends AppCompatActivity {
 
 
 
+
+
+
+
     public void opcionSeleccionadaMenu(){
         bottomNavigationView.setSelectedItemId(R.id.favoritos);
 
