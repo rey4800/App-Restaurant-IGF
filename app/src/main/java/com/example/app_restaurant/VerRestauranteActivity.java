@@ -8,6 +8,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -19,6 +20,7 @@ import com.example.app_restaurant.models.Restaurante;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,7 +40,8 @@ public class VerRestauranteActivity extends AppCompatActivity {
     private ImageView imageView;
     private TextView txtNombreRestaurante, txtDescripcion, txtDetallesUbi,txtLike,txtDepartamento;
     private DatabaseReference mDatabase;
-    private FloatingActionButton btnLike;
+    private FloatingActionButton btnlike,quitar;
+    DatabaseReference likerefence;
 
 
 
@@ -61,13 +64,46 @@ public class VerRestauranteActivity extends AppCompatActivity {
         imageView = findViewById(R.id.image);
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
-        btnLike = findViewById(R.id.btnLike);
-
-
+        btnlike = findViewById(R.id.btnLike);
+        quitar = findViewById(R.id.btnQuitar);
         mostrarDatosRestauranteSeleccionado();
 
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
+        //isLikes(restaurante.getId_restaurante(), btnlike);
+        nrLikes(txtLike, restaurante.getId_restaurante());
+        validarInicioSesion();
 
 
+        btnlike.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+
+                if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
+
+                    FirebaseDatabase.getInstance().getReference().child("Likes").child(restaurante.getId_restaurante())
+                            .child(firebaseUser.getUid()).setValue(true);
+
+                }else{
+
+                    Toast.makeText(VerRestauranteActivity.this, "Debe de Inicar sesion", Toast.LENGTH_SHORT).show();
+
+                }
+            }
+        });
+        quitar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
+
+                    FirebaseDatabase.getInstance().getReference().child("Likes").child(restaurante.getId_restaurante())
+                            .child(firebaseUser.getUid()).removeValue();
+
+                }
+
+            }
+        });
 
     }
 
@@ -92,26 +128,71 @@ public class VerRestauranteActivity extends AppCompatActivity {
     }
 
 
-    public void btnAccionLiked(View view){
-
-        if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
 
 
 
+    public void isLikes(String postid, ImageView image){
+        FirebaseUser firebaseUser= FirebaseAuth.getInstance().getCurrentUser();
 
-        }else{
+        DatabaseReference reference = FirebaseDatabase.getInstance().getReference()
+                .child("Likes")
+                .child(restaurante.getId_restaurante());
 
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
 
+                if (snapshot.child(firebaseUser.getUid()).exists()){
+                    btnlike.setImageResource(R.drawable.ic_liked);
+                    btnlike.setTag("Liked");
+                }else{
+                    btnlike.setImageResource(R.drawable.ic_like);
+                    btnlike.setTag("quitar");
+                }
+            }
 
-            Toast.makeText(this, "Necesita Iniciar Sesion", Toast.LENGTH_SHORT).show();
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
 
-        }
+            }
+        });
 
 
 
 
     }
 
+    public void nrLikes(TextView txtLike, String restauranteid){
+        DatabaseReference reference= FirebaseDatabase.getInstance().getReference().child("Likes").child(restauranteid);
+        reference.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                txtLike.setText(snapshot.getChildrenCount()+" likes");
+                mDatabase.child("Restaurantes").child(restaurante.getId_restaurante()).child("likes").setValue(snapshot.getChildrenCount());
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+
+
+    }
+
+
+    public void validarInicioSesion(){
+
+        if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
+
+            isLikes(restaurante.getId_restaurante(), btnlike);
+
+        }else{
+
+        }
+
+    }
 
 
 

@@ -156,6 +156,7 @@
                     android:layout_height="wrap_content"
                     android:text="0"
                     android:textColor="@color/lightblack2"
+                    android:onClick="probasion"
                     android:textSize="16dp" />
 
 
@@ -183,15 +184,31 @@
                 android:textSize="18sp" />
 
 
+
+
         </LinearLayout>
 
     </androidx.core.widget.NestedScrollView>
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/btnLike"
+        android:id="@+id/btnQuitar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginRight="30dp"
+        android:backgroundTint="@color/white2"
+        android:baselineAlignBottom="false"
+        android:clickable="true"
+        android:onClick="btnAccionLiked"
+        android:src="@drawable/ic_cancel"
+        app:fabSize="normal"
+        app:layout_anchor="@id/appbar"
+        app:layout_anchorGravity="end|bottom" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btnLike"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="100dp"
         android:backgroundTint="@color/white2"
         android:baselineAlignBottom="false"
         android:clickable="true"
@@ -200,4 +217,5 @@
         app:fabSize="normal"
         app:layout_anchor="@id/appbar"
         app:layout_anchorGravity="end|bottom" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

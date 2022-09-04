@@ -74,6 +74,7 @@ public class MenuPrincipal extends AppCompatActivity {
         mDatabase.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
+                restaurantes.clear();
                 for (DataSnapshot dataSnapshot: snapshot.getChildren()){
                     Restaurante restaurante = dataSnapshot.getValue(Restaurante.class);
                     restaurantes.add(restaurante);
