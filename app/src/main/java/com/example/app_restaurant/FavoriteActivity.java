@@ -11,6 +11,7 @@ import android.view.MenuItem;
 import android.view.WindowManager;
 
 import com.example.app_restaurant.adapter.ListaRestaurantesAdapter;
+import com.example.app_restaurant.adapter.ListaRestaurantesAdapter2;
 import com.example.app_restaurant.models.Restaurante;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
@@ -31,7 +32,7 @@ public class FavoriteActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     List<Restaurante> restaurantes;
     private DatabaseReference mDatabase;
-    private ListaRestaurantesAdapter listaRestaurante;
+    private ListaRestaurantesAdapter2 listaRestaurante2;
     RecyclerView recyclerView;
     private FirebaseAuth mAuth;
 
@@ -65,7 +66,7 @@ public class FavoriteActivity extends AppCompatActivity {
         String idUsu = mAuth.getCurrentUser().getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
         restaurantes = new ArrayList<>();
-        listaRestaurante = new ListaRestaurantesAdapter(restaurantes, this);
+        listaRestaurante2 = new ListaRestaurantesAdapter2(restaurantes, this);
         DatabaseReference comment = databaseReference.child("Guardados").child(idUsu);
 
 
@@ -77,7 +78,7 @@ public class FavoriteActivity extends AppCompatActivity {
                     Restaurante restaurante = dataSnapshot.getValue(Restaurante.class);
                     restaurantes.add(restaurante);
                 }
-                listaRestaurante.notifyDataSetChanged();
+                listaRestaurante2.notifyDataSetChanged();
             }
 
             @Override
@@ -90,7 +91,7 @@ public class FavoriteActivity extends AppCompatActivity {
 
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        recyclerView.setAdapter(listaRestaurante);
+        recyclerView.setAdapter(listaRestaurante2);
     }
 
 

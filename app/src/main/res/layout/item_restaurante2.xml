@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/item"
+    android:layout_height="wrap_content"
+    android:layout_width="match_parent"
+    android:animateLayoutChanges="true"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="4dp"
+    app:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:animateLayoutChanges="true"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:padding="6dp">
+
+            <ImageView
+                android:id="@+id/imgList"
+                android:layout_width="100dp"
+                android:layout_height="100dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:foregroundGravity="center"
+                android:padding="14dp"
+                android:paddingLeft="14dp"
+                app:srcCompat="@drawable/avatar"></ImageView>
+
+            <TextView
+                android:id="@+id/tvNombreItemRestaurante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_toEndOf="@+id/imgList"
+                android:text="Nombre" />
+
+            <TextView
+                android:id="@+id/tvDescripcionItemRestaurante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvNombreItemRestaurante"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/imgList"
+                android:text="Descripcion" />
+
+            <TextView
+                android:id="@+id/tvDepartamentoItemRestaurante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tvDescripcionItemRestaurante"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="10dp"
+                android:layout_toEndOf="@+id/imgList"
+                android:text="Departamento" />
+
+            <ImageView
+                android:id="@+id/tvLikesItemRestaurante"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_liked"
+                android:layout_below="@+id/tvDepartamentoItemRestaurante"
+                android:layout_marginStart="208dp"
+                android:layout_marginTop="3dp"
+                android:layout_toEndOf="@+id/imgList" />
+        </RelativeLayout>
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>
