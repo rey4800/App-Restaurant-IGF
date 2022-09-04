@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.Path;
 import android.os.Bundle;
 import android.util.Log;
@@ -41,7 +42,7 @@ public class MenuPrincipal extends AppCompatActivity {
     List<Restaurante> restaurantes;
     private DatabaseReference mDatabase;
     private BottomNavigationView bottomNavigationView;
-    private Button btnAgregarRestaurante;
+    private Button btnAgregarRestaurante, btnMasLikes,btnMenosLikes,btnTodos;
     private  ListaRestaurantesAdapter listaRestaurante;
     RecyclerView recyclerView;
     private FirebaseAuth mAuth;
@@ -60,8 +61,12 @@ public class MenuPrincipal extends AppCompatActivity {
         //Inicializar variable menu
          bottomNavigationView = findViewById(R.id.bottom_navigation);
          btnAgregarRestaurante = findViewById(R.id.btnAgregar);
+         btnMasLikes = findViewById(R.id.btnMasLikes);
+         btnMenosLikes = findViewById(R.id.btnMenosLike);
+         btnTodos = findViewById(R.id.btnTodos);
          recyclerView = findViewById(R.id.listRestaurantes);
          mAuth = FirebaseAuth.getInstance();
+
         //Instanciar los objetos de firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
         databaseReference = firebaseDatabase.getReference();//Obtenemos la refrencia de nuestra base de datos
@@ -155,6 +160,9 @@ public class MenuPrincipal extends AppCompatActivity {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(listaRestaurante);
+        btnMenosLikes.setTextColor(Color.BLACK);
+        btnMasLikes.setTextColor(Color.YELLOW);;
+        btnTodos.setTextColor(Color.BLACK);;
 
 
     }
@@ -191,12 +199,19 @@ public class MenuPrincipal extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(listaRestaurante);
 
+        btnMenosLikes.setTextColor(Color.YELLOW);
+        btnMasLikes.setTextColor(Color.BLACK);;
+        btnTodos.setTextColor(Color.BLACK);;
+
     }
 
 
     public void btnTodos(View view){
 
         cargarListaRestaurantes();
+        btnMenosLikes.setTextColor(Color.BLACK);
+        btnMasLikes.setTextColor(Color.BLACK);;
+        btnTodos.setTextColor(Color.YELLOW);;
 
     }
 
