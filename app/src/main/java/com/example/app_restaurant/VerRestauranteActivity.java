@@ -84,6 +84,9 @@ public class VerRestauranteActivity extends AppCompatActivity {
                     FirebaseDatabase.getInstance().getReference().child("Likes").child(restaurante.getId_restaurante())
                             .child(firebaseUser.getUid()).setValue(true);
 
+                    FirebaseDatabase.getInstance().getReference().child("Guardados").child(firebaseUser.getUid())
+                            .child(restaurante.getId_restaurante()).setValue(restaurante);//agregarlo a favoritos
+
                 }else{
 
                     Toast.makeText(VerRestauranteActivity.this, "Debe de Inicar sesion", Toast.LENGTH_SHORT).show();
@@ -99,6 +102,9 @@ public class VerRestauranteActivity extends AppCompatActivity {
 
                     FirebaseDatabase.getInstance().getReference().child("Likes").child(restaurante.getId_restaurante())
                             .child(firebaseUser.getUid()).removeValue();
+
+                    FirebaseDatabase.getInstance().getReference().child("Guardados").child(firebaseUser.getUid())
+                            .child(restaurante.getId_restaurante()).removeValue(); //borrarlo de favoritos
 
                 }
 
@@ -193,7 +199,6 @@ public class VerRestauranteActivity extends AppCompatActivity {
         }
 
     }
-
 
 
 }
