@@ -191,6 +191,7 @@
         android:backgroundTint="@color/white2"
         android:clickable="true"
         app:fabSize="normal"
+        android:id="@+id/btnLike"
         app:layout_anchor="@id/appbar"
         android:src="@drawable/ic_like"
         app:layout_anchorGravity="end|bottom"

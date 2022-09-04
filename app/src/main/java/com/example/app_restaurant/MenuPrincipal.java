@@ -23,6 +23,7 @@ import com.example.app_restaurant.models.Restaurante;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -41,6 +42,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private  ListaRestaurantesAdapter listaRestaurante;
     RecyclerView recyclerView;
     private FirebaseAuth mAuth;
+    private  FloatingActionButton btnLike;
 
 
 
@@ -56,9 +58,10 @@ public class MenuPrincipal extends AppCompatActivity {
          bottomNavigationView = findViewById(R.id.bottom_navigation);
          btnAgregarRestaurante = findViewById(R.id.btnAgregar);
          recyclerView = findViewById(R.id.listRestaurantes);
-        mAuth = FirebaseAuth.getInstance();
-        opcionSeleccionadaMenu();
-        cargarListaRestaurantes();
+         btnLike = findViewById(R.id.btnLike);
+         mAuth = FirebaseAuth.getInstance();
+         opcionSeleccionadaMenu();
+         cargarListaRestaurantes();
 
 
 
@@ -125,7 +128,7 @@ public class MenuPrincipal extends AppCompatActivity {
     public void btnAgregarRestaurante(View view){
 
 
-        if(mAuth.getCurrentUser() !=null){
+        if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
 
             startActivity(new Intent(MenuPrincipal.this,AgregarRestauranteActivity.class));
             // finish();

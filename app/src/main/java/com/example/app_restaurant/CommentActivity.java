@@ -67,6 +67,8 @@ public class CommentActivity extends AppCompatActivity {
         txtComentario = findViewById(R.id.txtComentario);
         recyclerView = findViewById(R.id.listComentarios);
         cargarComentarios();
+        validarInicioSesion();
+
 
 
 
@@ -79,9 +81,10 @@ public class CommentActivity extends AppCompatActivity {
 
 
         if(mAuth.getCurrentUser() !=null) {
+
             if (!tvComentario.isEmpty()) {
 
-                getUserInfo(); //Obtener los datos del usuario logueado
+
                 String idUsu = mAuth.getCurrentUser().getUid();
                 comentario.setId(UUID.randomUUID().toString());
                 comentario.setId_Usu(idUsu);
@@ -143,7 +146,6 @@ public class CommentActivity extends AppCompatActivity {
 
     private void getUserInfo() {
         String id = mAuth.getCurrentUser().getUid();
-
         mDatabase.child("Users").child(id).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -165,6 +167,18 @@ public class CommentActivity extends AppCompatActivity {
 
             }
         });
+
+    }
+
+
+    public void validarInicioSesion(){
+
+
+        if(mAuth.getCurrentUser() !=null){//usuario iniciSesion
+
+            getUserInfo(); //Obtener los datos del usuario logueado
+
+        }
 
     }
 
