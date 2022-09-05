@@ -117,28 +117,34 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
 
         if(!nombreRestaurante.isEmpty() && !descripcion.isEmpty() && !detallesUbicacion.isEmpty()){
             if(latitud != 0.0 && longitud != 0.0){
-                StorageReference Folder = FirebaseStorage.getInstance().getReference().child("Restaurantes");
-                final StorageReference file_name = Folder.child("file" + FileUri.getLastPathSegment());
-                file_name.putFile(FileUri).addOnSuccessListener(taskSnapshot -> file_name.getDownloadUrl().addOnSuccessListener(uri -> {
+                if(FileUri != null) {
+                    StorageReference Folder = FirebaseStorage.getInstance().getReference().child("Restaurantes");
+                    final StorageReference file_name = Folder.child("file" + FileUri.getLastPathSegment());
+                    file_name.putFile(FileUri).addOnSuccessListener(taskSnapshot -> file_name.getDownloadUrl().addOnSuccessListener(uri -> {
 
-                restaurante.setId_Usu(idUsu);
-                restaurante.setId_restaurante(UUID.randomUUID().toString());
-                restaurante.setDepartamento(seleccion);
-                restaurante.setLikes(0);
-                restaurante.setDescripcion(descripcion);
-                restaurante.setUbicacion(detallesUbicacion);
-                restaurante.setNombre(nombreRestaurante);
-                restaurante.coordenadas = new Coordenada(latitud,longitud);
+                        restaurante.setId_Usu(idUsu);
+                        restaurante.setId_restaurante(UUID.randomUUID().toString());
+                        restaurante.setDepartamento(seleccion);
+                        restaurante.setLikes(0);
+                        restaurante.setDescripcion(descripcion);
+                        restaurante.setUbicacion(detallesUbicacion);
+                        restaurante.setNombre(nombreRestaurante);
+                        restaurante.coordenadas = new Coordenada(latitud, longitud);
 
-                restaurante.setImagen(String.valueOf(uri));
+                        restaurante.setImagen(String.valueOf(uri));
 
-                mDatabase.child("Restaurantes").child(restaurante.getId_restaurante()).setValue(restaurante);
+                        mDatabase.child("Restaurantes").child(restaurante.getId_restaurante()).setValue(restaurante);
 
-                Toast.makeText(this, "Se guardo con exito", Toast.LENGTH_LONG).show();
-                finish();
+                        Toast.makeText(this, "Se guardo con exito", Toast.LENGTH_LONG).show();
+                        finish();
 
 
-                 }));
+                    }));
+
+                }else{
+
+                    Toast.makeText(this, "Debe Agregar una Imagen", Toast.LENGTH_SHORT).show();
+                }
             }else{
 
                 Toast.makeText(this, "Debe Agregar una Ubicacion", Toast.LENGTH_SHORT).show();
@@ -161,7 +167,7 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
 
 
 
-    //Cargar Imagen de perfil
+    //Cargar Imagen
 
     public void botonCargar(View view){
         fileUpload();
@@ -198,9 +204,11 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
                             .into(imageView);
                 } else {
                     Toast.makeText(this, "Error al cargar esta imagen", Toast.LENGTH_SHORT).show();
+                    FileUri = null;
                 }
 
             } else {
+                FileUri = null;
                 Toast.makeText(this, "No se pudo cargar ningun archivo", Toast.LENGTH_SHORT).show();
             }
 
