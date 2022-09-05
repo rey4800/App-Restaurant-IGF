@@ -50,6 +50,7 @@ public class ListaRestaurantesAdapter extends RecyclerView.Adapter<ListaRestaura
 
                 Intent intent = new Intent(holder.itemView.getContext(), VerRestauranteActivity.class);
                 intent.putExtra("restaurante", (Serializable) data.get(position));
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 holder.itemView.getContext().startActivity(intent);
             }
         });

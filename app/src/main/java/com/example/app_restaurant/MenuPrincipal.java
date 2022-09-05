@@ -16,6 +16,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.example.app_restaurant.adapter.ListaRestaurantesAdapter;
@@ -46,6 +47,7 @@ public class MenuPrincipal extends AppCompatActivity {
     private  ListaRestaurantesAdapter listaRestaurante;
     RecyclerView recyclerView;
     private FirebaseAuth mAuth;
+    private SearchView search;
 
     //Declaracion de objetos para manipular las base de datos de firebase
     FirebaseDatabase firebaseDatabase;
@@ -66,6 +68,11 @@ public class MenuPrincipal extends AppCompatActivity {
          btnTodos = findViewById(R.id.btnTodos);
          recyclerView = findViewById(R.id.listRestaurantes);
          mAuth = FirebaseAuth.getInstance();
+        search  = findViewById(R.id.buscarRestaurante);
+
+        search.setQueryHint("Nombre o departamento");
+        restaurantes = new ArrayList<>();
+
 
         //Instanciar los objetos de firebase
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -74,6 +81,40 @@ public class MenuPrincipal extends AppCompatActivity {
          cargarListaRestaurantes();
 
 
+        //metodo de  buscador
+        search.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+
+                return false;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String s) {
+                buscar(s);
+                return false;
+            }
+
+
+        });
+
+
+    }
+
+
+    //metodo de  buscador
+    private void buscar(String s) {
+        ArrayList<Restaurante> listaBuscar = new ArrayList<>();
+
+        for (Restaurante  objeto : restaurantes){
+            if(objeto.getNombre().toLowerCase().contains(s.toLowerCase())||objeto.getDepartamento().toLowerCase().contains(s.toLowerCase())){
+                listaBuscar.add(objeto);
+            }
+
+        }
+
+        ListaRestaurantesAdapter adapter = new ListaRestaurantesAdapter(listaBuscar,getApplicationContext());
+        recyclerView.setAdapter(adapter);
     }
 
     public void cargarListaRestaurantes(){
