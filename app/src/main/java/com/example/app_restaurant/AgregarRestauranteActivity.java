@@ -44,6 +44,10 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
     private double latitud,longitud;
     private User usuario;
 
+    //Declaracion de objetos para manipular las base de datos de firebase
+    FirebaseDatabase firebaseDatabase;
+    DatabaseReference databaseReference;
+
     //Variable para manejar imagen
     private static final int File = 1;
     public Uri FileUri;
@@ -58,8 +62,13 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
+        firebaseDatabase = FirebaseDatabase.getInstance();
+        databaseReference = firebaseDatabase.getReference();//Obtenemos la refrencia de nuestra base de datos
         restaurante =  new Restaurante();
         usuario = new User();
+
+
+
 
         //Inicilization variables
         spinner1 =  findViewById(R.id.spinner);
@@ -115,46 +124,66 @@ public class AgregarRestauranteActivity extends AppCompatActivity {
         String seleccion = spinner1.getSelectedItem().toString();
 
 
-        if(!nombreRestaurante.isEmpty() && !descripcion.isEmpty() && !detallesUbicacion.isEmpty()){
-            if(latitud != 0.0 && longitud != 0.0){
-                if(FileUri != null) {
-                    StorageReference Folder = FirebaseStorage.getInstance().getReference().child("Restaurantes");
-                    final StorageReference file_name = Folder.child("file" + FileUri.getLastPathSegment());
-                    file_name.putFile(FileUri).addOnSuccessListener(taskSnapshot -> file_name.getDownloadUrl().addOnSuccessListener(uri -> {
+            if(usuario.getPuntaje()>=30){
+                if(!nombreRestaurante.isEmpty() && !descripcion.isEmpty() && !detallesUbicacion.isEmpty()){
+                    if(latitud != 0.0 && longitud != 0.0){
+                        if(FileUri != null) {
+                            StorageReference Folder = FirebaseStorage.getInstance().getReference().child("Restaurantes");
+                            final StorageReference file_name = Folder.child("file" + FileUri.getLastPathSegment());
+                            file_name.putFile(FileUri).addOnSuccessListener(taskSnapshot -> file_name.getDownloadUrl().addOnSuccessListener(uri -> {
 
-                        restaurante.setId_Usu(idUsu);
-                        restaurante.setId_restaurante(UUID.randomUUID().toString());
-                        restaurante.setDepartamento(seleccion);
-                        restaurante.setLikes(0);
-                        restaurante.setDescripcion(descripcion);
-                        restaurante.setUbicacion(detallesUbicacion);
-                        restaurante.setNombre(nombreRestaurante);
-                        restaurante.coordenadas = new Coordenada(latitud, longitud);
+                                restaurante.setId_Usu(idUsu);
+                                restaurante.setId_restaurante(UUID.randomUUID().toString());
+                                restaurante.setDepartamento(seleccion);
+                                restaurante.setLikes(0);
+                                restaurante.setDescripcion(descripcion);
+                                restaurante.setUbicacion(detallesUbicacion);
+                                restaurante.setNombre(nombreRestaurante);
+                                restaurante.coordenadas = new Coordenada(latitud, longitud);
 
-                        restaurante.setImagen(String.valueOf(uri));
+                                restaurante.setImagen(String.valueOf(uri));
 
-                        mDatabase.child("Restaurantes").child(restaurante.getId_restaurante()).setValue(restaurante);
+                                mDatabase.child("Restaurantes").child(restaurante.getId_restaurante()).setValue(restaurante);
 
-                        Toast.makeText(this, "Se guardo con exito", Toast.LENGTH_LONG).show();
-                        finish();
+                                RestarPuntosUsuario();
+                                Toast.makeText(this, "Se guardo con exito", Toast.LENGTH_LONG).show();
+                                finish();
 
 
-                    }));
+                            }));
 
-                }else{
+                        }else{
 
-                    Toast.makeText(this, "Debe Agregar una Imagen", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(this, "Debe Agregar una Imagen", Toast.LENGTH_SHORT).show();
+                        }
+                    }else{
+
+                        Toast.makeText(this, "Debe Agregar una Ubicacion", Toast.LENGTH_SHORT).show();
+                    }
+                } else{
+                    Toast.makeText(this, "Debe completar los campos", Toast.LENGTH_SHORT).show();
                 }
+
             }else{
 
-                Toast.makeText(this, "Debe Agregar una Ubicacion", Toast.LENGTH_SHORT).show();
+                Toast.makeText(this, "Debe Tener al menos 30 puntos en su cuenta para agregar", Toast.LENGTH_LONG).show();
+
             }
-    } else{
-            Toast.makeText(this, "Debe completar los campos", Toast.LENGTH_SHORT).show();
-        }
 
     }
 
+
+    public void RestarPuntosUsuario(){
+
+        String id = mAuth.getCurrentUser().getUid();
+        int puntaje = usuario.getPuntaje() - 30;
+        usuario.setPuntaje(puntaje);
+
+
+        databaseReference.child("Users").child(id).setValue(usuario);
+
+
+    }
 
 
     public void AgregarUbicacionGPS(View view){
